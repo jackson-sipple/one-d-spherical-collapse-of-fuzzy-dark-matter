@@ -2,7 +2,7 @@ import json
 import os
 from itertools import product
 
-def generate_config(N=2, r_min=1e-2, softlen=0, safety_factor=1e-3, thickness_coef=0, j_coef=0, outfile=None):
+def generate_config(N=2, r_min=0, softlen=1e-2, safety_factor=1e-3, thickness_coef=1e-2, j_coef=1e-2, outfile=None):
     if outfile is None:
         outfile = f"runs/sim_N{N}_soft{softlen}_sf{safety_factor}_tc{thickness_coef}_jc{j_coef}.h5"
     else:
@@ -12,12 +12,17 @@ def generate_config(N=2, r_min=1e-2, softlen=0, safety_factor=1e-3, thickness_co
         "softlen": softlen,
         "safety_factor": safety_factor,
         "thickness_coef": thickness_coef,
+        "dt_min": 1e-9,
         "j_coef": j_coef,
-        "t_max": 5,
+        "t_max": 1.5,
         "r_min": r_min,
-        "m_tot": 1,
+        "m_pert": 1,
         "stepper_strategy": "beeman",
-        "output_file": outfile
+        "energy_strategy": "energy_le_delliou",
+        "accel_strategy": "soft_le_delliou",
+        "save_strategy": "all",
+        "timescale_strategy": "dyn_thickness_vel",
+        "save_filename": outfile
     }
     return config
 
@@ -26,11 +31,11 @@ def main():
     os.makedirs("configs", exist_ok=True)
 
     # Parameter combinations
-    softlen_values = [0, 1e-4, 1e-3, 1e-2, 1e-1]
-    safety_factor_values = [1e-2, 1e-4, 1e-5]
-    j_coef_values = [1e-3, 1e-2, 1e-1, 5e-1]
-    thickness_coef_values = [0, 1e-3, 1e-2, 1e-1]
-    r_min_values = [1e-3, 1e-1]
+    softlen_values = [1e-4, 1e-3, 1e-1]
+    safety_factor_values = [1e-2, 1e-4]
+    j_coef_values = [1e-3, 1e-1]
+    thickness_coef_values = [1e-4, 1e-3, 1e-1]
+    r_min_values = [0]
 
     configs = [generate_config()]
 
@@ -43,8 +48,8 @@ def main():
     for jc in j_coef_values:
         configs.append(generate_config(j_coef=jc, outfile=f"runs/j_coef/{jc}.h5"))
 
-    for rm in r_min_values:
-        configs.append(generate_config(r_min=rm, outfile=f"runs/r_min/{rm}.h5"))
+    # for rm in r_min_values:
+    #     configs.append(generate_config(r_min=rm, outfile=f"runs/r_min/{rm}.h5"))
 
     for tc in thickness_coef_values:
         configs.append(generate_config(thickness_coef=tc, outfile=f"runs/thickness_coef/{tc}.h5"))
@@ -61,6 +66,10 @@ def main():
     #         j_coef=j_coef
     #     ))
 
+    # Delete any existing config files in the directory
+    for filename in os.listdir("configs"):
+        if filename.endswith(".json"):
+            os.remove(os.path.join("configs", filename))
     # Save configurations
     for i, config in enumerate(configs):
         filename = f"config_{i+1}.json"

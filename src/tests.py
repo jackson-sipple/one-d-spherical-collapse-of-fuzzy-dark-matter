@@ -13,7 +13,7 @@ def base_config():
         "N": 1,
         "r_max": 1,
         "r_min": 0,
-        "m_tot": 1,
+        "m_pert": 1,
         "point_mass": 0,
         "j_coef": 1,
         "ang_mom_strategy": "const",
@@ -256,7 +256,7 @@ def test_kepler(base_config, m, H, r, J):
 
     # Run simulation
     filename = f"test_outputs/test_kepler_{m}_{H}_{r}_{J}.h5"
-    config = {**base_config, "m_tot": m, "j_coef": J, 'H': H, 'r_max': r, 't_max': t_max, 'save_filename': filename}
+    config = {**base_config, "m_pert": m, "j_coef": J, 'H': H, 'r_max': r, 't_max': t_max, 'save_filename': filename}
     sim = SphericalCollapse(config)
     results = sim.run()
 

@@ -22,13 +22,13 @@ def main():
 
     # Override output file if specified in command line
     if args.output:
-        config['output_file'] = args.output
+        config['save_filename'] = args.output
 
-    run_simulation(config, config['output_file'])
+    run_simulation(config, config['save_filename'])
 
     # Optionally, load and verify the saved data
-    params, snapshots = load_simulation_data(config['output_file'])
-    print(f"Loaded {len(snapshots['t'])} snapshots from {config['output_file']}")
+    params, snapshots = load_simulation_data(config['save_filename'])
+    print(f"Loaded {len(snapshots['t'])} snapshots from {config['save_filename']}")
 
 if __name__ == "__main__":
     main()
