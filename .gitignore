@@ -5,6 +5,8 @@ stats
 logs/
 configs/
 test_outputs/
+_archive/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
