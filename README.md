@@ -1,2 +1,2 @@
-# 1D Spherical Collapse of Fuzzy Dark Matter
-Numerical time-stepping code simulating spherical collapse of cold dark matter (CDM) and fuzzy dark matter (FDM). See Chapter 5 of my dissertation for details as of December 1, 2025: [link](https://proxy.library.upenn.edu/login?url=https://www.proquest.com/dissertations-theses/probing-cosmic-reionization-fuzzy-dark-matter/docview/3298663609/se-2?accountid=14707)
+# 1D Spherical Collapse of Fuzzy Dark Matter and Cold Dark Matter
+Numerical time-stepping code simulating spherical collapse of cold dark matter (CDM) and fuzzy dark matter (FDM). See Chapter 5: "Towards the Modified Spherical Collapse Model of Fuzzy Dark Matter" of my dissertation for details as of December 1, 2025: [link](https://proxy.library.upenn.edu/login?url=https://www.proquest.com/dissertations-theses/probing-cosmic-reionization-fuzzy-dark-matter/docview/3298663609/se-2?accountid=14707)
