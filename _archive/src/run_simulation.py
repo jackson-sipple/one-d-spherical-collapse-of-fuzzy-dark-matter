@@ -1,0 +1,37 @@
+import argparse
+import json
+from collapse import SphericalCollapse
+from utils import save_to_hdf5, load_simulation_data
+import sys
+sys.path.insert(1, '/home/jsipple/one_d_spherical_collapse/one-d-spherical-collapse-of-fuzzy-dark-matter/')
+sys.path.insert(1, '/home/jsipple/one_d_spherical_collapse/one-d-spherical-collapse-of-fuzzy-dark-matter/src')
+
+def run_simulation(config, output_file):
+    sim = SphericalCollapse(config)
+    sim.run()
+    save_to_hdf5(sim, output_file)
+    print(f"Simulation completed. Results saved to {output_file}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Run SphericalCollapse simulation")
+    parser.add_argument("--config", type=str, required=True, help="JSON file containing simulation parameters")
+    parser.add_argument("--output", type=str, help="Output HDF5 file name (overrides config file)")
+
+    args = parser.parse_args()
+
+    # Load config from file
+    with open(args.config, 'r') as f:
+        config = json.load(f)
+
+    # Override output file if specified in command line
+    if args.output:
+        config['save_filename'] = args.output
+
+    run_simulation(config, config['save_filename'])
+
+    # Optionally, load and verify the saved data
+    params, snapshots = load_simulation_data(config['save_filename'])
+    print(f"Loaded {len(snapshots['t'])} snapshots from {config['save_filename']}")
+
+if __name__ == "__main__":
+    main()

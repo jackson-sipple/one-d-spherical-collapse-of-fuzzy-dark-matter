@@ -1,0 +1,20 @@
+2025-07-31 16:45:08,097 - collapse - INFO - Simulation setup complete
+Skipping pressure because all values are None
+Skipping dpressure_drho because all values are None
+Skipping rho_prime because all values are None
+Skipping e_p because all values are None
+Skipping e_q because all values are None
+Skipping t_dyn because all values are None
+Skipping t_cross because all values are None
+Skipping t_crossa because all values are None
+Skipping t_cross2 because all values are None
+Skipping t_zero because all values are None
+Skipping t_rmin because all values are None
+Skipping t_rmina because all values are None
+Skipping t_ref because all values are None
+Skipping t_thickness because all values are None
+Skipping t_dynr because all values are None
+Skipping t_dynnext because all values are None
+Skipping t_sound because all values are None
+Skipping t_j because all values are None
+Skipping t_jeans because all values are None

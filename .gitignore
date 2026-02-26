@@ -5,7 +5,11 @@ stats
 logs/
 configs/
 test_outputs/
-_archive/
+#_archive/ include many older files actually
+*.npz
+*.nbc
+*.nbi
+
 .vscode/
 
 # Byte-compiled / optimized / DLL files
